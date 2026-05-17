@@ -7,16 +7,16 @@ echo "Запуск тестів"
 echo ""
 
 for N in "${SIZES[@]}"; do
-    echo "Розмір масиву N = $N"
+    echo "Розмір N = $N"
 
     echo ""
     echo ">>> Послідовна версія:"
-    ./sum_seq $N | grep -E "Time|Sum"
+    ./int_seq $N | grep -E "method|Time|Error"
 
     for P in "${PROCS[@]}"; do
         echo ""
         echo ">>> MPI з $P процесами:"
-        mpirun --oversubscribe -np $P ./sum_mpi $N | grep -E "Time|Sum|identical"
+        mpirun --oversubscribe -np $P ./int_mpi $N | grep -E "method|Time|Error|identical"
     done
     echo ""
 done
